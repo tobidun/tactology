@@ -17,8 +17,8 @@ const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const department_service_1 = require("./department.service");
 const department_entity_1 = require("./entities/department.entity");
-const create_department_input_1 = require("./dto/create-department.input");
-const update_department_input_1 = require("./dto/update-department.input");
+const create_department_input_1 = require("./input/create-department.input");
+const update_department_input_1 = require("./input/update-department.input");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let DepartmentResolver = class DepartmentResolver {
     constructor(departmentService) {
@@ -26,7 +26,6 @@ let DepartmentResolver = class DepartmentResolver {
     }
     createDepartment(createDepartmentInput, req) {
         const user = req.user.payload;
-        console.log(user);
         if (!user || !user.sub) {
             throw new common_1.UnauthorizedException("User not authorized");
         }
@@ -41,11 +40,16 @@ let DepartmentResolver = class DepartmentResolver {
         const userId = user.sub;
         return this.departmentService.findAll(userId);
     }
-    updateDepartment(updateDepartmentInput) {
-        return this.departmentService.update(updateDepartmentInput);
+    async department(id) {
+        console.log("testing here");
+        console.log(id);
+        return this.departmentService.getDepartmentById(id);
     }
-    deleteDepartment(id) {
-        return this.departmentService.remove(id);
+    async updateDepartment(input) {
+        return this.departmentService.updateDepartment(input);
+    }
+    async deleteDepartment(id) {
+        return this.departmentService.deleteDepartment(id);
     }
 };
 exports.DepartmentResolver = DepartmentResolver;
@@ -67,18 +71,26 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], DepartmentResolver.prototype, "departments", null);
 __decorate([
+    (0, graphql_1.Query)(() => department_entity_1.Department),
+    __param(0, (0, graphql_1.Args)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], DepartmentResolver.prototype, "department", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, graphql_1.Mutation)(() => department_entity_1.Department),
     __param(0, (0, graphql_1.Args)("input")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [update_department_input_1.UpdateDepartmentInput]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], DepartmentResolver.prototype, "updateDepartment", null);
 __decorate([
-    (0, graphql_1.Mutation)(() => Boolean),
-    __param(0, (0, graphql_1.Args)("id", { type: () => graphql_1.ID })),
+    (0, graphql_1.Mutation)(() => department_entity_1.Department),
+    __param(0, (0, graphql_1.Args)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], DepartmentResolver.prototype, "deleteDepartment", null);
 exports.DepartmentResolver = DepartmentResolver = __decorate([
     (0, graphql_1.Resolver)(() => department_entity_1.Department),

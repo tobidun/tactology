@@ -16,6 +16,10 @@ let UpdateDepartmentInput = class UpdateDepartmentInput {
 };
 exports.UpdateDepartmentInput = UpdateDepartmentInput;
 __decorate([
+    (0, graphql_1.Field)(() => graphql_1.ID),
+    __metadata("design:type", Number)
+], UpdateDepartmentInput.prototype, "id", void 0);
+__decorate([
     (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], UpdateDepartmentInput.prototype, "name", void 0);

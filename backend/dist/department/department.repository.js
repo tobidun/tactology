@@ -32,14 +32,16 @@ let DepartmentRepository = class DepartmentRepository {
         });
     }
     async findById(id) {
-        return this.repository.findOne({ where: { id } });
+        return this.repository.findOne({
+            where: { id },
+            relations: ["createdBy", "subDepartments"],
+        });
     }
-    async deleteById(id) {
-        const result = await this.repository.delete(id);
-        return (result.affected ?? 0) > 0;
+    async save(departmentData) {
+        return this.repository.save(departmentData);
     }
-    async save(department) {
-        return this.repository.save(department);
+    async removeDepartmentById(id) {
+        await this.repository.delete(id);
     }
 };
 exports.DepartmentRepository = DepartmentRepository;

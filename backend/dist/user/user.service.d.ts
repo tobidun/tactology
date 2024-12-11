@@ -1,6 +1,6 @@
 import { UserRepository } from "./user.repository";
 import { User } from "./entities/user.entity";
-import { CreateUserInput } from "./dto/create-user.input";
+import { CreateUserInput } from "./input/create-user.input";
 export declare class UserService {
     private userRepository;
     constructor(userRepository: UserRepository);

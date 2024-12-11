@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const user_service_1 = require("./user.service");
-const create_user_input_1 = require("./dto/create-user.input");
+const create_user_input_1 = require("./input/create-user.input");
 const user_entity_1 = require("./entities/user.entity");
 let UserResolver = class UserResolver {
     constructor(userService) {

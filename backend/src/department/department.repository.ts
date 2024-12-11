@@ -23,15 +23,17 @@ export class DepartmentRepository {
   }
 
   async findById(id: number): Promise<Department | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({
+      where: { id },
+      relations: ["createdBy", "subDepartments"],
+    });
   }
 
-  async deleteById(id: number): Promise<boolean> {
-    const result = await this.repository.delete(id);
-    return (result.affected ?? 0) > 0;
+  async save(departmentData: Partial<Department>): Promise<Department> {
+    return this.repository.save(departmentData);
   }
 
-  async save(department: Department): Promise<Department> {
-    return this.repository.save(department);
+  async removeDepartmentById(id: number): Promise<void> {
+    await this.repository.delete(id);
   }
 }

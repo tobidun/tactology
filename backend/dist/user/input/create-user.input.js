@@ -9,21 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateDepartmentInput = void 0;
+exports.CreateUserInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
-const sub_department_input_1 = require("./sub-department.input");
-let UpdateDepartmentInput = class UpdateDepartmentInput {
+const class_validator_1 = require("class-validator");
+let CreateUserInput = class CreateUserInput {
 };
-exports.UpdateDepartmentInput = UpdateDepartmentInput;
+exports.CreateUserInput = CreateUserInput;
 __decorate([
     (0, graphql_1.Field)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateDepartmentInput.prototype, "name", void 0);
+], CreateUserInput.prototype, "username", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => [sub_department_input_1.SubDepartmentInput]),
-    __metadata("design:type", Array)
-], UpdateDepartmentInput.prototype, "subDepartments", void 0);
-exports.UpdateDepartmentInput = UpdateDepartmentInput = __decorate([
+    (0, graphql_1.Field)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(6),
+    __metadata("design:type", String)
+], CreateUserInput.prototype, "password", void 0);
+exports.CreateUserInput = CreateUserInput = __decorate([
     (0, graphql_1.InputType)()
-], UpdateDepartmentInput);
-//# sourceMappingURL=update-department.input.js.map
+], CreateUserInput);
+//# sourceMappingURL=create-user.input.js.map

@@ -41,16 +41,36 @@ let DepartmentService = class DepartmentService {
     async findAll(userId) {
         return this.departmentRepository.findAllWithRelations(userId);
     }
-    async update(updateDepartmentInput) {
-        const department = await this.departmentRepository.findById(updateDepartmentInput.id);
-        if (!department) {
-            throw new common_1.NotFoundException("Department not found");
-        }
-        department.name = updateDepartmentInput.name;
+    async getDepartmentById(id) {
+        return this.departmentRepository.findById(id);
+    }
+    async updateDepartment(input) {
+        const department = await this.departmentRepository.findById(input.id);
+        if (!department)
+            throw new Error("Department not found");
+        department.name = input.name;
+        const subDepartmentsToSave = await Promise.all(input.subDepartments.map(async (subDepartmentData) => {
+            const existingSubDepartment = await this.subDepartmentRepository.findOne(input, subDepartmentData);
+            console.log(existingSubDepartment);
+            if (existingSubDepartment) {
+                existingSubDepartment.name = subDepartmentData.name;
+                console.log(existingSubDepartment.name);
+                console.log(subDepartmentData.name);
+                return existingSubDepartment;
+            }
+            else {
+                return null;
+            }
+        }));
+        const validSubDepartmentsToSave = subDepartmentsToSave.filter(Boolean);
+        await this.subDepartmentRepository.save(validSubDepartmentsToSave);
         return this.departmentRepository.save(department);
     }
-    async remove(id) {
-        return this.departmentRepository.deleteById(id);
+    async deleteDepartment(id) {
+        const department = await this.departmentRepository.findById(id);
+        if (!department)
+            throw new Error("Department not found");
+        await this.departmentRepository.removeDepartmentById(id);
     }
 };
 exports.DepartmentService = DepartmentService;

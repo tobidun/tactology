@@ -25,6 +25,17 @@ let SubDepartmentRepository = class SubDepartmentRepository {
         const subDepartment = this.repository.create(subDepartmentData);
         return this.repository.save(subDepartment);
     }
+    async save(subDepartments) {
+        return this.repository.save(subDepartments);
+    }
+    async findOne(input, subDepartmentData) {
+        return this.repository.findOne({
+            where: {
+                department: { id: input.id },
+                name: subDepartmentData.name,
+            },
+        });
+    }
 };
 exports.SubDepartmentRepository = SubDepartmentRepository;
 exports.SubDepartmentRepository = SubDepartmentRepository = __decorate([

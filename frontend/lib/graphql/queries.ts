@@ -17,6 +17,18 @@ export const GET_DEPARTMENTS = gql`
   }
 `;
 
+export const GET_DEPARTMENT_BY_ID = gql`
+  query department($id: Float!) {
+    department(id: $id) {
+      name
+      subDepartments {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const CREATE_DEPARTMENT = gql`
   mutation createDepartment($input: CreateDepartmentInput!) {
     createDepartment(input: $input) {
@@ -31,10 +43,21 @@ export const CREATE_DEPARTMENT = gql`
 `;
 
 export const UPDATE_DEPARTMENT = gql`
-  mutation UpdateDepartment($input: UpdateDepartmentInput!) {
+  mutation updateDepartment($input: UpdateDepartmentInput!) {
     updateDepartment(input: $input) {
       id
       name
+      subDepartments {
+        name
+      }
+    }
+  }
+`;
+
+export const DELETE_DEPARTMENT = gql`
+  mutation deleteDepartment($id: ID!) {
+    deleteDepartment(id: $id) {
+      id
     }
   }
 `;

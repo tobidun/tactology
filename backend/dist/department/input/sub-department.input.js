@@ -9,21 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateDepartmentInput = void 0;
+exports.SubDepartmentInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
-const sub_department_input_1 = require("./sub-department.input");
-let UpdateDepartmentInput = class UpdateDepartmentInput {
+let SubDepartmentInput = class SubDepartmentInput {
 };
-exports.UpdateDepartmentInput = UpdateDepartmentInput;
+exports.SubDepartmentInput = SubDepartmentInput;
+__decorate([
+    (0, graphql_1.Field)(() => graphql_1.ID),
+    __metadata("design:type", Number)
+], SubDepartmentInput.prototype, "id", void 0);
 __decorate([
     (0, graphql_1.Field)(),
     __metadata("design:type", String)
-], UpdateDepartmentInput.prototype, "name", void 0);
-__decorate([
-    (0, graphql_1.Field)(() => [sub_department_input_1.SubDepartmentInput]),
-    __metadata("design:type", Array)
-], UpdateDepartmentInput.prototype, "subDepartments", void 0);
-exports.UpdateDepartmentInput = UpdateDepartmentInput = __decorate([
+], SubDepartmentInput.prototype, "name", void 0);
+exports.SubDepartmentInput = SubDepartmentInput = __decorate([
     (0, graphql_1.InputType)()
-], UpdateDepartmentInput);
-//# sourceMappingURL=update-department.input.js.map
+], SubDepartmentInput);
+//# sourceMappingURL=sub-department.input.js.map

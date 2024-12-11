@@ -26,12 +26,13 @@ type Department {
 type Mutation {
   createDepartment(input: CreateDepartmentInput!): Department!
   createUser(input: CreateUserInput!): User!
-  deleteDepartment(id: ID!): Boolean!
+  deleteDepartment(id: Float!): Department!
   login(password: String!, username: String!): String!
   updateDepartment(input: UpdateDepartmentInput!): Department!
 }
 
 type Query {
+  department(id: Float!): Department!
   departments: [Department!]!
 }
 
@@ -40,9 +41,15 @@ type SubDepartment {
   name: String!
 }
 
+input SubDepartmentInput {
+  id: ID!
+  name: String!
+}
+
 input UpdateDepartmentInput {
   id: ID!
   name: String!
+  subDepartments: [SubDepartmentInput!]!
 }
 
 type User {

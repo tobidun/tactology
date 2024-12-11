@@ -6,6 +6,6 @@ export declare class DepartmentRepository {
     create(departmentData: Partial<Department>): Promise<Department>;
     findAllWithRelations(userId: number): Promise<Department[]>;
     findById(id: number): Promise<Department | null>;
-    deleteById(id: number): Promise<boolean>;
-    save(department: Department): Promise<Department>;
+    save(departmentData: Partial<Department>): Promise<Department>;
+    removeDepartmentById(id: number): Promise<void>;
 }
