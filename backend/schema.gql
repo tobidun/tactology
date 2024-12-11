@@ -1,0 +1,52 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDepartmentInput {
+  name: String!
+  subDepartments: [CreateSubDepartmentInput!]
+}
+
+input CreateSubDepartmentInput {
+  name: String!
+}
+
+input CreateUserInput {
+  password: String!
+  username: String!
+}
+
+type Department {
+  createdBy: User
+  id: ID!
+  name: String!
+  subDepartments: [SubDepartment!]
+}
+
+type Mutation {
+  createDepartment(input: CreateDepartmentInput!): Department!
+  createUser(input: CreateUserInput!): User!
+  deleteDepartment(id: ID!): Boolean!
+  login(password: String!, username: String!): String!
+  updateDepartment(input: UpdateDepartmentInput!): Department!
+}
+
+type Query {
+  departments: [Department!]!
+}
+
+type SubDepartment {
+  id: ID!
+  name: String!
+}
+
+input UpdateDepartmentInput {
+  id: ID!
+  name: String!
+}
+
+type User {
+  createdDepartments: [Department!]
+  id: ID!
+  username: String!
+}

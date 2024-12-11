@@ -1,0 +1,11 @@
+export const GRAPHQL_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:3000/graphql";
+
+export const DEPARTMENT_VALIDATION = {
+  NAME_MIN_LENGTH: 1,
+  NAME_MAX_LENGTH: 100,
+  DESCRIPTION_MIN_LENGTH: 1,
+  DESCRIPTION_MAX_LENGTH: 500,
+  MIN_HEAD_COUNT: 0,
+  MAX_HEAD_COUNT: 10000,
+} as const;
